@@ -2,14 +2,23 @@
   <div id="app">
     <h1>{{ msg }}</h1>
     <ul>
+       <p>请选择代付通道:</p>
       <li>
-        <p>请选择代付通道:</p>
-	<select v-model="channel" id="channel" name="channel" >
+	<select v-model="channel">
+		<option disabled value="">请选择代付通道</option>
 		<option value="juzhen_test">钜真测试通道</option>
 		<option value="juzhen">钜真正式通道</option>
 	</select>
      </li>
     </ul>
+    <ul>
+      <li>
+	<p>请选择收款商户:</p>
+        <select v-model="store" @change="onSelectedStore($event)">
+       		<option :value="store.id" v-for="store in stores">{{ store.name }}</option>
+	 </select>
+     </li>
+    </ul> 
     <ul>
       <li><input type="text" v-model="accountName" id="accountName" placeholder=" 请输入收款人姓名 " /></li>
     </ul>
@@ -50,10 +59,30 @@ export default {
     return {
       msg: '代付页面',
       transactionResponse: '',
+      cardNum: '',
+      accountName: '',
+      bankName: '', 
+      stores: [
+		{id: 0, name: '清空', accountName: '', cardNum: '', bankName: ''},
+		{id: 1, name: '微富支付', accountName: '唐新汀', cardNum: '6217710306687542', bankName: '中信银行深圳民治支行'}
+	]    
      }
   },
 
   methods: {
+	getStore(storeId) {
+            if(!storeId) return ""
+                return this.stores.find( d => d.id === storeId)
+        },
+
+	onSelectedStore(event) {
+        	const storeId = parseInt(event.target.value) 
+		const store = this.getStore(storeId)
+		this.cardNum = store.cardNum
+		this.accountName = store.accountName
+		this.bankName = store.bankName
+        },
+
  	getBalance() {
 		this.transactionResponse = '提交中......'
 		var vm = this
