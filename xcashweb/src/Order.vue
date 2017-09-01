@@ -32,6 +32,7 @@
    	        <th>银行订单号</th>
 		<th>平台订单号</th>
 		<th>客户订单号</th>
+		<th>金额</th>
 		<th>订单状态</th>
 		<th>交易时间</th>
 		<th>客户名称</th>
@@ -41,6 +42,7 @@
     		<td>{{order.extOrderNo}}</td>
 		<td>{{order.orderNo}}</td>
 		<td>{{order.sellerOrderNo}}</td>
+		<td>{{order.totalFee}}</td>
 		<td>{{order.status}}</td>
 		<td>{{order.updateDate}}</td>
 		<td>{{order.storeName}}</td>
@@ -63,7 +65,7 @@ export default {
       transactionResponse: '',
       targetOrderNo: '',
       extOrderNo: '',
-      order: {orderNo: '',sellerOrderNo: '', status: '',targetOrderNo: '',extOrderNo: '', sellerOrderNo: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''},
+      order: {orderNo: '',sellerOrderNo: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''},
      }
   },
 
@@ -74,7 +76,7 @@ export default {
 
 
 	clear() {
-		this.order = {orderNo: '',sellerOrderNo: '', status: '',targetOrderNo: '',extOrderNo: '', sellerOrderNo: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''}
+		this.order = {orderNo: '',sellerOrderNo: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''}
 		this.transactionResponse = ''
 		this.targetOrderNo = ''
 		this.extOrderNo = ''
@@ -84,7 +86,7 @@ export default {
 	
 	resetProcessing() {
 		this.transactionResponse = '提交中......'
-		this.order = {orderNo: '',sellerOrderNo: '', status: '',targetOrderNo: '',extOrderNo: '', sellerOrderNo: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''}
+		this.order = {orderNo: '',sellerOrderNo: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''}
 	},
 
 	queryOrder() {
