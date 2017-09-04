@@ -60,7 +60,7 @@ export default {
   name: 'order',
   data () {
     return {
-      baseUrl: 'http://localhost:8082',
+      baseUrl: 'http://106.14.47.193',
       msg: '订单管理',
       transactionResponse: '',
       targetOrderNo: '',
