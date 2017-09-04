@@ -60,7 +60,7 @@ export default {
   name: 'order',
   data () {
     return {
-      baseUrl: 'http://106.14.47.193',
+      baseUrl: 'http://localhost:8082',
       msg: '订单管理',
       transactionResponse: '',
       targetOrderNo: '',
@@ -108,7 +108,7 @@ export default {
 		   vm.order = response.data
 		})
 		.catch(function (error) {
-            		vm.transactionResponse = '查询失败. ' + error
+            		vm.transactionResponse = '查询失败. ' + error.data
           	})
 	 },
 
@@ -135,7 +135,7 @@ export default {
 		   vm.order = response.data	
 		})
                 .catch(function (error) {
-                        vm.transactionResponse = '退款失败. ' + error
+                        vm.transactionResponse = '退款失败. ' + error.data
                 })
          }
   } 
