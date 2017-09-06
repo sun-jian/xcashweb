@@ -1,10 +1,10 @@
 <template>
   <vue-tabs>
-    <v-tab title="订单管理">
+   <v-tab title="订单管理">
        <order/>
     </v-tab>
- <!--
-    <v-tab title="代付管理">
+<!--
+     <v-tab title="代付管理">
       <cash/>
     </v-tab>
 -->

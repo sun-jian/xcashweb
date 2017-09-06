@@ -65,7 +65,8 @@ export default {
       stores: [
 		{id: 0, name: '清空', accountName: '', cardNum: '', bankName: ''},
 		{id: 1, name: '微富支付', accountName: '唐新汀', cardNum: '6217710306687542', bankName: '中信银行深圳民治支行'},
-		{id: 2, name: '钜真测试账号', accountName: '中宏测试', cardNum: '6228480038395977176', bankName: '银行'},
+		{id: 2, name: '声动网络', accountName: '王玉娟', cardNum: '6225887553045945', bankName: '招行深圳蛇口支行'},
+		{id: 3, name: '钜真测试账号', accountName: '中宏测试', cardNum: '6228480038395977176', bankName: '银行'},
 	]    
      }
   },

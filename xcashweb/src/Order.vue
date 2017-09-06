@@ -36,7 +36,8 @@
 		<th>订单状态</th>
 		<th>交易时间</th>
 		<th>客户名称</th>
-  	</tr>
+		<th>通道来源</th> 
+ 	</tr>
   	<tr>
     		<td>{{order.targetOrderNo}}</td>
     		<td>{{order.extOrderNo}}</td>
@@ -46,6 +47,7 @@
 		<td>{{order.status}}</td>
 		<td>{{order.updateDate}}</td>
 		<td>{{order.storeName}}</td>
+		<td>{{order.paymentGatewayName}}</td>
   	</tr>
 	</table>
     </div>
