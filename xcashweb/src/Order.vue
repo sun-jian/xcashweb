@@ -5,7 +5,6 @@
 	<li>
 		<form role="form" class="form" onsubmit="return false;">
 		<div v-if="!image">
-    			      上传图片
    		 	<input type="file" @change="onFileChange">
  		 </div>
 		<div v-else>
