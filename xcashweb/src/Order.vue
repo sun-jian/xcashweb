@@ -2,6 +2,20 @@
   <div id="order">
     <h1>{{ msg }}</h1>
     <ul>
+	<li>
+		<form role="form" class="form" onsubmit="return false;">
+		<div v-if="!image">
+    			      上传图片
+   		 	<input type="file" @change="onFileChange">
+ 		 </div>
+		<div v-else>
+   			 <img :src="image" width="280" height="480"/>
+   		 	<button @click="removeImage">换一张</button>
+  		</div>
+		</form>
+	</li>
+    </ul>
+    <ul>
       <li><input type="text" v-model="targetOrderNo" id="targetOrderNo" placeholder=" 请输入微信／支付宝订单号 " size="40" /></li>
     </ul>
     <ul>
@@ -58,6 +72,8 @@
 <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
 
 <script>
+import VueFileUpload from 'vue-file-upload';
+
 export default {
   name: 'order',
   data () {
@@ -68,7 +84,8 @@ export default {
       targetOrderNo: '',
       extOrderNo: '',
       order: {orderNo: '',sellerOrderNo: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''},
-     }
+      image: '', 
+    }
   },
 
   methods: {
@@ -76,6 +93,48 @@ export default {
            return (!str || /^\s*$/.test(str));
         },
 
+	onFileChange(e) {
+      		var files = e.target.files || e.dataTransfer.files;
+     		if (!files.length)
+        		return;
+     		this.createImage(files[0]);
+		this.uploadImage(files[0]);
+    	},
+    
+	createImage(file) {
+      		var image = new Image();
+      		var reader = new FileReader();
+      		var vm = this;
+
+      		reader.onload = (e) => {
+ 	      	 	vm.image = e.target.result;
+      		};
+
+     		reader.readAsDataURL(file);
+	},
+
+	uploadImage(file) {
+		var vm = this;
+
+		var data = new FormData();
+		data.append('file', file);
+		var orderUrl = vm.baseUrl + '/upload';
+		axios.post(orderUrl, data)
+		.then(function (res) {
+			vm.targetOrderNo = res.data.targetOrderNo;
+           		vm.transactionResponse = '上传成功';
+		})
+            	.catch(function (err) {
+			alert('FAILED'+err);
+              		vm.transactionResponse = '上传失败';
+           	 });
+	},
+
+	removeImage: function (e) {
+     		 this.image = '';
+    	},
+
+	
 
 	clear() {
 		this.order = {orderNo: '',sellerOrderNo: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''}
@@ -84,6 +143,7 @@ export default {
 		this.extOrderNo = ''
 		this.orderNo = ''
 		this.sellerOrderNo = ''	
+		this.image = ''
 	},
 	
 	resetProcessing() {
