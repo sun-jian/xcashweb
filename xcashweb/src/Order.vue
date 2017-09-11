@@ -71,7 +71,6 @@
 <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
 
 <script>
-import VueFileUpload from 'vue-file-upload';
 
 export default {
   name: 'order',
