@@ -11,8 +11,9 @@
 		<th>保证金通道</th>
 		<th>日交易额上限(万元)</th>
 		<th>通道信息</th>
+		<th>操作</th>
  	</tr>
-  	<tr v-for="store in stores">
+  	<tr v-for="store in stores" v-bind:key="store.code">
     		<td>{{store.name}}</td>
     		<td>{{store.appKey}}</td>
 		<td>{{store.code}}</td>
@@ -35,6 +36,29 @@
 			</td>
 		    </tr>
 	         </table>
+		</td>
+		<td>
+		   <table>
+	 	    <div v-if="!store.codeUrl">		
+		     <tr>
+			<td>
+			<input type="button" v-on:click="getTestLink(store)" value="获取测试二维码"/>
+			</td>
+		     </tr>
+                    </div>
+		    <div v-else>
+		     <tr>
+			<td>
+                         <input type="button" v-on:click="clearTestLink(store)" value="清除测试二维码"/>
+                        </td>
+		     <tr>
+		     </tr>
+			<td>
+			 <img :src="store.qrCodeUrl" width="150" height="150"/>
+			</td>
+	    	     </tr>
+		    </div>
+		   </table>
 		</td>
   	</tr>
 	</table>
@@ -60,7 +84,7 @@ export default {
       bailPercentage: '',
       dailyLimit: '',
       channels: [],
-      stores: []  
+      stores: []
    }
   },
 
@@ -84,6 +108,25 @@ export default {
             		vm.transactionResponse = '查询失败. ' + error.data
           	})
 	 },
+	
+	getTestLink(store) {
+		var vm = this
+		var orderUrl = vm.baseUrl + '/xcash/stores/' + store.code + '?appKey='+ store.appKey
+		axios.get(orderUrl)
+		.then(function (response) {
+		    vm.$set(store, 'codeUrl', response.data.codeUrl)
+		    vm.$set(store, 'qrCodeUrl', 'http://pan.baidu.com/share/qrcode?w=150&h=150&url='+response.data.codeUrl)
+		})
+		.catch(function (error) {
+                     vm.transactionResponse = '测试失败. ' + error.data
+                 })
+	},
+
+	clearTestLink(store) {
+		var vm = this
+		vm.$set(store, 'codeUrl', null)
+		vm.$set(store, 'qrCodeUrl', null)
+	}
 
   },
 
