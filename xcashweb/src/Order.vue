@@ -43,7 +43,7 @@
  	 <tr>
    	        <th>微信／支付宝订单号</th>
    	        <th>银行订单号</th>
-		<th>平台订单号</th>
+		<th>客户订单号</th>
 		<th>应用跳转地址</th>
 		<th>金额</th>
 		<th>订单状态</th>
@@ -54,7 +54,7 @@
   	<tr>
     		<td>{{order.targetOrderNo}}</td>
     		<td>{{order.extOrderNo}}</td>
-		<td>{{order.orderNo}}</td>
+		<td>{{order.sellerOrderNo}}</td>
 		<td>{{order.returnUrl}}</td>
 		<td>{{order.totalFee}}</td>
 		<td>{{order.status}}</td>
@@ -81,7 +81,7 @@ export default {
       transactionResponse: '',
       targetOrderNo: '',
       extOrderNo: '',
-      order: {orderNo: '',returnUrl: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''},
+      order: {sellerOrderNo: '',returnUrl: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''},
       image: '', 
     }
   },
@@ -135,7 +135,7 @@ export default {
 	
 
 	clear() {
-		this.order = {orderNo: '',returnUrl: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''}
+		this.order = {sellerOrderNo: '',returnUrl: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''}
 		this.transactionResponse = ''
 		this.targetOrderNo = ''
 		this.extOrderNo = ''
@@ -146,7 +146,7 @@ export default {
 	
 	resetProcessing() {
 		this.transactionResponse = '提交中......'
-		this.order = {orderNo: '',returnUrl: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''}
+		this.order = {sellerOrderNo: '',returnUrl: '', status: '',targetOrderNo: '',extOrderNo: '', totalFee: '', updateDate: '', storeNmae: '', appKey: '', paymentGateway: '', channelNo: ''}
 	},
 
 	queryOrder() {
